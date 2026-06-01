@@ -1,0 +1,1567 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  --stripe-violet: #635BFF;
+  --stripe-violet-dark: #4F46E5;
+  --stripe-violet-light: #E8E7FF;
+  --stripe-midnight: #0A2540;
+  --stripe-slate: #425466;
+  --stripe-mist: #8898AA;
+  --stripe-cloud: #C4C9D4;
+  --stripe-fog: #E6EBF1;
+  --stripe-white: #FFFFFF;
+  --stripe-sky: #00D4FF;
+  --stripe-teal: #00B4A0;
+  --stripe-green: #24B47E;
+  --stripe-green-light: #D4EFDF;
+  --stripe-orange: #F26D1E;
+  --stripe-red: #CD3D64;
+  --stripe-red-light: #FDE8ED;
+  --stripe-amber: #F5A623;
+  --stripe-amber-light: #FEF3D8;
+  --stripe-bg: #F6F9FC;
+  --font: 'Sora', sans-serif;
+  --mono: 'JetBrains Mono', monospace;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --shadow-sm: 0 1px 3px rgba(10,37,64,0.08);
+  --shadow: 0 4px 12px rgba(10,37,64,0.1);
+  --shadow-lg: 0 8px 30px rgba(10,37,64,0.12);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--stripe-bg);
+  color: var(--stripe-midnight);
+  line-height: 1.6;
+}
+
+/* ---- NAV ---- */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--stripe-fog);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 52px;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--stripe-midnight);
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+.nav-logo svg { width: 36px; }
+
+nav button {
+  background: none;
+  border: none;
+  padding: 6px 14px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--stripe-slate);
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+nav button:hover { background: var(--stripe-fog); color: var(--stripe-midnight); }
+nav button.active { background: var(--stripe-violet-light); color: var(--stripe-violet); }
+
+/* ---- LAYOUT ---- */
+.page { display: none; padding: 40px 32px; max-width: 900px; margin: 0 auto; }
+.page.active { display: block; }
+
+/* ---- SECTION ---- */
+.section { margin-bottom: 56px; }
+.section-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--stripe-violet);
+  margin-bottom: 6px;
+}
+.section-heading {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--stripe-midnight);
+  margin-bottom: 8px;
+}
+.section-desc {
+  font-size: 14px;
+  color: var(--stripe-slate);
+  margin-bottom: 28px;
+  max-width: 620px;
+  line-height: 1.65;
+}
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--stripe-fog);
+  margin: 40px 0;
+}
+
+/* ---- CARDS ---- */
+.card {
+  background: var(--stripe-white);
+  border: 1px solid var(--stripe-fog);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* ---- COLORS ---- */
+.color-swatch {
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--stripe-fog);
+}
+.swatch-box {
+  height: 72px;
+}
+.swatch-info {
+  background: white;
+  padding: 10px 12px;
+}
+.swatch-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--stripe-midnight);
+}
+.swatch-hex {
+  font-size: 11px;
+  color: var(--stripe-mist);
+  font-family: var(--mono);
+}
+.swatch-role {
+  font-size: 11px;
+  color: var(--stripe-slate);
+  margin-top: 2px;
+}
+
+.color-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+.color-row-label {
+  width: 100px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--stripe-slate);
+  padding-top: 8px;
+  flex-shrink: 0;
+}
+.color-scale {
+  display: flex;
+  flex: 1;
+  gap: 3px;
+}
+.color-scale-step {
+  flex: 1;
+  height: 36px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.15s;
+  position: relative;
+}
+.color-scale-step:hover { transform: scaleY(1.15); }
+.color-scale-step span {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  color: var(--stripe-mist);
+  white-space: nowrap;
+}
+
+/* ---- TYPOGRAPHY ---- */
+.type-sample {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--stripe-fog);
+}
+.type-sample:last-child { border-bottom: none; }
+.type-meta {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.type-badge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: var(--stripe-fog);
+  color: var(--stripe-slate);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.type-spec {
+  font-size: 11px;
+  color: var(--stripe-mist);
+  font-family: var(--mono);
+}
+
+/* ---- SPACING ---- */
+.space-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.space-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.space-bar {
+  background: var(--stripe-violet-light);
+  border: 1.5px solid var(--stripe-violet);
+  border-radius: 2px;
+  height: 20px;
+}
+.space-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--stripe-midnight);
+  min-width: 36px;
+}
+.space-name {
+  font-size: 12px;
+  color: var(--stripe-slate);
+  min-width: 80px;
+}
+.space-use {
+  font-size: 11px;
+  color: var(--stripe-mist);
+}
+
+/* ---- COMPONENTS ---- */
+.comp-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--stripe-mist);
+  margin-bottom: 12px;
+}
+.comp-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+/* Stripe Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 9px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-decoration: none;
+  line-height: 1.2;
+}
+.btn-primary { background: var(--stripe-violet); color: white; }
+.btn-primary:hover { background: #5149e0; box-shadow: 0 3px 10px rgba(99,91,255,0.3); }
+.btn-secondary { background: white; color: var(--stripe-midnight); border: 1px solid var(--stripe-cloud); }
+.btn-secondary:hover { background: var(--stripe-fog); }
+.btn-ghost { background: transparent; color: var(--stripe-violet); }
+.btn-ghost:hover { background: var(--stripe-violet-light); }
+.btn-dark { background: var(--stripe-midnight); color: white; }
+.btn-dark:hover { background: #0d2f50; }
+.btn-danger { background: var(--stripe-red); color: white; }
+.btn-sm { font-size: 12px; padding: 6px 14px; }
+.btn-lg { font-size: 16px; padding: 12px 28px; }
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 100px;
+}
+.badge-success { background: var(--stripe-green-light); color: #147a50; }
+.badge-warning { background: var(--stripe-amber-light); color: #8a5500; }
+.badge-error { background: var(--stripe-red-light); color: #9e1e3a; }
+.badge-info { background: var(--stripe-violet-light); color: var(--stripe-violet-dark); }
+.badge-neutral { background: var(--stripe-fog); color: var(--stripe-slate); }
+
+/* Form elements */
+.form-group { margin-bottom: 16px; }
+.form-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--stripe-midnight);
+  margin-bottom: 5px;
+  letter-spacing: 0.02em;
+}
+.form-input {
+  width: 100%;
+  font-family: var(--font);
+  font-size: 14px;
+  padding: 9px 12px;
+  border: 1.5px solid var(--stripe-cloud);
+  border-radius: 6px;
+  background: white;
+  color: var(--stripe-midnight);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.form-input:focus {
+  border-color: var(--stripe-violet);
+  box-shadow: 0 0 0 3px rgba(99,91,255,0.15);
+}
+.form-hint { font-size: 11px; color: var(--stripe-mist); margin-top: 4px; }
+.form-error { font-size: 11px; color: var(--stripe-red); margin-top: 4px; }
+.form-input.error { border-color: var(--stripe-red); }
+.form-input.success { border-color: var(--stripe-green); }
+
+/* Cards */
+.ui-card {
+  background: white;
+  border: 1px solid var(--stripe-fog);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s;
+}
+.ui-card:hover { box-shadow: var(--shadow); }
+.ui-card-accent {
+  border-top: 3px solid var(--stripe-violet);
+}
+
+/* ---- PRINCIPLES ---- */
+.principle-card {
+  background: white;
+  border: 1px solid var(--stripe-fog);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  border-left: 4px solid var(--stripe-violet);
+}
+.principle-num {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--stripe-violet);
+  margin-bottom: 8px;
+}
+.principle-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--stripe-midnight);
+  margin-bottom: 10px;
+}
+.principle-desc {
+  font-size: 14px;
+  color: var(--stripe-slate);
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+.principle-do-dont {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 14px;
+}
+.do-box, .dont-box {
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.do-box { background: var(--stripe-green-light); color: #147a50; }
+.dont-box { background: var(--stripe-red-light); color: #9e1e3a; }
+.do-box strong, .dont-box strong { display: block; font-weight: 700; margin-bottom: 3px; }
+
+/* ---- MOTION ---- */
+.motion-demo {
+  width: 100%;
+  height: 80px;
+  background: var(--stripe-fog);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  position: relative;
+  overflow: hidden;
+}
+.motion-ball {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--stripe-violet);
+  position: relative;
+}
+@keyframes ease-in { 0%{left:20px} 100%{left:calc(100% - 52px)} }
+@keyframes ease-out { 0%{left:20px} 100%{left:calc(100% - 52px)} }
+@keyframes stripe-ease { 0%{left:20px} 100%{left:calc(100% - 52px)} }
+.ball-ease { position: absolute; animation: ease-in 1.2s ease-in-out infinite alternate; }
+.ball-ease2 { position: absolute; animation: ease-out 0.6s cubic-bezier(0.25,0.46,0.45,0.94) infinite alternate; }
+.ball-stripe { position: absolute; animation: stripe-ease 0.8s cubic-bezier(0.4,0,0.2,1) infinite alternate; }
+
+/* ---- ELEVATION ---- */
+.elev-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.elev-card {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 20px 16px;
+  text-align: center;
+  border: 1px solid var(--stripe-fog);
+}
+.elev-label { font-size: 12px; font-weight: 600; color: var(--stripe-slate); margin-top: 8px; }
+.elev-val { font-size: 10px; color: var(--stripe-mist); font-family: var(--mono); margin-top: 2px; }
+
+/* ---- ICONOGRAPHY SECTION ---- */
+.icon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 8px; }
+.icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 8px;
+  border-radius: 8px;
+  background: white;
+  border: 1px solid var(--stripe-fog);
+  font-size: 11px;
+  color: var(--stripe-slate);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.icon-item:hover { background: var(--stripe-violet-light); color: var(--stripe-violet); border-color: var(--stripe-violet); }
+.icon-item i { font-size: 20px; }
+
+/* ---- STRIPE GRADIENT HERO ---- */
+.hero-section {
+  background: linear-gradient(135deg, var(--stripe-midnight) 0%, #1a3f70 50%, #0e2d5c 100%);
+  border-radius: var(--radius-xl);
+  padding: 48px 40px;
+  margin-bottom: 48px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 320px; height: 320px;
+  border-radius: 50%;
+  background: rgba(99,91,255,0.15);
+}
+.hero-section::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: 20%;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: rgba(0,212,255,0.08);
+}
+.hero-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--stripe-sky);
+  margin-bottom: 12px;
+  position: relative;
+}
+.hero-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 14px;
+  position: relative;
+  line-height: 1.2;
+}
+.hero-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  position: relative;
+  max-width: 500px;
+  line-height: 1.65;
+}
+
+/* ---- STRIPE PATTERN CARD ---- */
+.pattern-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+
+/* ---- GRID SYSTEM ---- */
+.grid-vis { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--stripe-fog); }
+.grid-row { display: flex; height: 32px; }
+.grid-col { flex: 1; border-right: 1px solid rgba(99,91,255,0.12); background: rgba(99,91,255,0.04); position: relative; }
+.grid-col:last-child { border-right: none; }
+.grid-col.active { background: rgba(99,91,255,0.15); }
+.grid-gutter { width: 16px; background: transparent; flex-shrink: 0; }
+
+/* ---- SCROLLBAR ---- */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--stripe-cloud); border-radius: 4px; }
+
+/* ---- RESPONSIVE CHIPS ---- */
+.chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.chip {
+  font-size: 12px;
+  padding: 5px 12px;
+  background: var(--stripe-fog);
+  color: var(--stripe-slate);
+  border-radius: 100px;
+  font-weight: 500;
+}
+.chip.active { background: var(--stripe-violet-light); color: var(--stripe-violet); }
+
+/* Tabs within page */
+.tab-strip { display: flex; gap: 2px; margin-bottom: 24px; border-bottom: 1px solid var(--stripe-fog); }
+.tab-item {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--stripe-slate);
+  padding: 8px 16px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.15s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  font-family: var(--font);
+}
+.tab-item.active { color: var(--stripe-violet); border-bottom-color: var(--stripe-violet); }
+.tab-item:hover:not(.active) { color: var(--stripe-midnight); }
+
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ---- METRIC CARD ---- */
+.metric-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.metric-card {
+  background: white;
+  border: 1px solid var(--stripe-fog);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+.metric-label { font-size: 11px; color: var(--stripe-mist); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+.metric-value { font-size: 24px; font-weight: 700; color: var(--stripe-midnight); }
+.metric-delta { font-size: 11px; font-weight: 600; margin-top: 4px; }
+.delta-up { color: var(--stripe-green); }
+.delta-down { color: var(--stripe-red); }
+
+/* ---- PAYMENT FORM ---- */
+.payment-card {
+  background: white;
+  border-radius: var(--radius-xl);
+  box-shadow: 0 8px 40px rgba(10,37,64,0.16);
+  overflow: hidden;
+  max-width: 420px;
+}
+.payment-header {
+  background: linear-gradient(135deg, #0A2540 0%, #1a3a65 100%);
+  padding: 20px 24px;
+  color: white;
+}
+.payment-brand { font-size: 12px; opacity: 0.6; margin-bottom: 4px; }
+.payment-amount { font-size: 28px; font-weight: 700; }
+.payment-body { padding: 24px; }
+.card-input-group {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1.5px solid var(--stripe-cloud);
+  border-radius: 6px;
+  overflow: hidden;
+  background: white;
+  transition: border-color 0.15s;
+}
+.card-input-group:focus-within { border-color: var(--stripe-violet); box-shadow: 0 0 0 3px rgba(99,91,255,0.15); }
+.card-input-part {
+  font-family: var(--font);
+  font-size: 14px;
+  padding: 9px 12px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--stripe-midnight);
+}
+.card-divider { width: 1px; height: 20px; background: var(--stripe-cloud); }
+
+/* ---- LIST COMP ---- */
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--stripe-fog);
+}
+.list-item:last-child { border-bottom: none; }
+.list-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.list-name { font-size: 14px; font-weight: 600; color: var(--stripe-midnight); }
+.list-sub { font-size: 12px; color: var(--stripe-mist); }
+.list-amount { margin-left: auto; font-size: 14px; font-weight: 700; color: var(--stripe-midnight); }
+
+/* ---- CODE BLOCK ---- */
+.code-block {
+  background: #0A2540;
+  color: #A9B1D6;
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  line-height: 1.6;
+  overflow-x: auto;
+}
+.code-keyword { color: #BB9AF7; }
+.code-string { color: #9ECE6A; }
+.code-comment { color: #565F89; }
+.code-number { color: #FF9E64; }
+.code-property { color: #7DCFFF; }
+
+/* ---- VOICE & TONE ---- */
+.vt-example {
+  background: white;
+  border: 1px solid var(--stripe-fog);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 10px;
+  display: flex;
+  gap: 12px;
+}
+.vt-mark {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.vt-good { background: var(--stripe-green-light); color: #147a50; }
+.vt-bad { background: var(--stripe-red-light); color: #9e1e3a; }
+.vt-text { font-size: 13px; color: var(--stripe-midnight); }
+.vt-sub { font-size: 11px; color: var(--stripe-mist); margin-top: 4px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <svg viewBox="0 0 60 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14.5 11.2c0-1.4 1.2-2 3-2 2.7 0 6.1.8 8.8 2.3V4.7c-2.9-1.2-5.8-1.7-8.8-1.7-7.2 0-12 3.8-12 10.1 0 9.8 13.6 8.3 13.6 12.5 0 1.7-1.4 2.2-3.4 2.2-3 0-6.8-.6-9.8-2.4v7c3.3 1.4 6.6 2 9.8 2 7.4 0 12.5-3.7 12.5-10.1-.1-10.7-13.7-8.8-13.7-13.1z" fill="#635BFF"/>
+    </svg>
+    Design System
+  </a>
+  <button class="active" onclick="showPage('overview')">Overview</button>
+  <button onclick="showPage('colors')">Color</button>
+  <button onclick="showPage('typography')">Typography</button>
+  <button onclick="showPage('spacing')">Spacing</button>
+  <button onclick="showPage('components')">Components</button>
+  <button onclick="showPage('patterns')">Patterns</button>
+  <button onclick="showPage('principles')">Principles</button>
+  <button onclick="showPage('voice')">Voice</button>
+</nav>
+
+<!-- OVERVIEW PAGE -->
+<div id="page-overview" class="page active">
+  <div class="hero-section">
+    <div class="hero-eyebrow">Stripe Design System</div>
+    <div class="hero-title">Financial infrastructure,<br>beautifully expressed.</div>
+    <div class="hero-sub">A comprehensive visual language for building products that feel as reliable and elegant as the infrastructure beneath them. Precision. Clarity. Trust.</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Core Identity</div>
+    <div class="section-heading">What makes Stripe, Stripe</div>
+    <div class="section-desc">Stripe's design language embodies the values of the product: powerful infrastructure made approachable, global scale made human, complexity made simple. Every visual decision reinforces trust.</div>
+    <div class="card-grid">
+      <div class="card">
+        <div style="width:36px;height:36px;background:var(--stripe-violet-light);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px"><i class="ti ti-lock" style="font-size:18px;color:var(--stripe-violet)"></i></div>
+        <div style="font-size:14px;font-weight:700;color:var(--stripe-midnight);margin-bottom:6px">Trust by design</div>
+        <div style="font-size:12px;color:var(--stripe-slate);line-height:1.6">Every element signals reliability. Clean lines, consistent behavior, and careful detail work convey a product you can depend on.</div>
+      </div>
+      <div class="card">
+        <div style="width:36px;height:36px;background:#E8F8F3;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px"><i class="ti ti-world" style="font-size:18px;color:var(--stripe-green)"></i></div>
+        <div style="font-size:14px;font-weight:700;color:var(--stripe-midnight);margin-bottom:6px">Global at scale</div>
+        <div style="font-size:12px;color:var(--stripe-slate);line-height:1.6">Stripe powers commerce in 135+ countries. The design system scales across cultures while retaining a singular, coherent identity.</div>
+      </div>
+      <div class="card">
+        <div style="width:36px;height:36px;background:#EBF4FF;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:12px"><i class="ti ti-code" style="font-size:18px;color:#3B8BD4"></i></div>
+        <div style="font-size:14px;font-weight:700;color:var(--stripe-midnight);margin-bottom:6px">Developer-first</div>
+        <div style="font-size:12px;color:var(--stripe-slate);line-height:1.6">From clear docs to elegant API design, the system respects the developer experience. Components are as logical to implement as they are to use.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Design Tokens at a Glance</div>
+    <div class="section-heading">The foundation</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="card">
+        <div class="comp-label">Primary Palette</div>
+        <div style="display:flex;gap:6px;margin-bottom:8px">
+          <div style="width:40px;height:40px;border-radius:6px;background:#635BFF"></div>
+          <div style="width:40px;height:40px;border-radius:6px;background:#0A2540"></div>
+          <div style="width:40px;height:40px;border-radius:6px;background:#425466"></div>
+          <div style="width:40px;height:40px;border-radius:6px;background:#F6F9FC;border:1px solid #E6EBF1"></div>
+        </div>
+        <div style="font-size:11px;color:var(--stripe-mist);font-family:var(--mono)">#635BFF / #0A2540 / #425466 / #F6F9FC</div>
+      </div>
+      <div class="card">
+        <div class="comp-label">Type Scale (Display)</div>
+        <div style="font-size:28px;font-weight:700;color:var(--stripe-midnight);line-height:1">Aa</div>
+        <div style="font-size:11px;color:var(--stripe-mist);margin-top:6px;font-family:var(--mono)">Sora / 28–64px / weight 700</div>
+      </div>
+      <div class="card">
+        <div class="comp-label">Border Radius</div>
+        <div style="display:flex;gap:8px;align-items:flex-end">
+          <div style="width:28px;height:28px;border-radius:4px;background:var(--stripe-violet-light);border:1.5px solid var(--stripe-violet)"></div>
+          <div style="width:32px;height:32px;border-radius:8px;background:var(--stripe-violet-light);border:1.5px solid var(--stripe-violet)"></div>
+          <div style="width:36px;height:36px;border-radius:12px;background:var(--stripe-violet-light);border:1.5px solid var(--stripe-violet)"></div>
+          <div style="width:40px;height:40px;border-radius:20px;background:var(--stripe-violet-light);border:1.5px solid var(--stripe-violet)"></div>
+        </div>
+        <div style="font-size:11px;color:var(--stripe-mist);margin-top:8px;font-family:var(--mono)">4px / 6px / 12px / 20px</div>
+      </div>
+      <div class="card">
+        <div class="comp-label">Elevation</div>
+        <div style="display:flex;gap:10px;align-items:flex-end">
+          <div style="width:36px;height:36px;border-radius:8px;background:white;border:1px solid var(--stripe-fog)"></div>
+          <div style="width:36px;height:36px;border-radius:8px;background:white;box-shadow:0 1px 3px rgba(10,37,64,0.08)"></div>
+          <div style="width:36px;height:36px;border-radius:8px;background:white;box-shadow:0 4px 12px rgba(10,37,64,0.1)"></div>
+          <div style="width:36px;height:36px;border-radius:8px;background:white;box-shadow:0 8px 30px rgba(10,37,64,0.12)"></div>
+        </div>
+        <div style="font-size:11px;color:var(--stripe-mist);margin-top:8px;font-family:var(--mono)">Border / sm / md / lg</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COLORS PAGE -->
+<div id="page-colors" class="page">
+  <div class="section-title">Color System</div>
+  <div class="section-heading">Purpose-driven palette</div>
+  <div class="section-desc">Stripe's color system is built around trust and legibility. The midnight/violet pairing anchors brand identity, while semantic colors guide user decisions with precision.</div>
+
+  <div class="section">
+    <div style="font-size:13px;font-weight:600;color:var(--stripe-slate);margin-bottom:16px">Brand Colors</div>
+    <div class="card-grid">
+      <div class="color-swatch">
+        <div class="swatch-box" style="background:#635BFF"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Stripe Violet</div>
+          <div class="swatch-hex">#635BFF</div>
+          <div class="swatch-role">Primary CTA, links, focus rings</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-box" style="background:#0A2540"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Midnight</div>
+          <div class="swatch-hex">#0A2540</div>
+          <div class="swatch-role">Headings, nav, dark backgrounds</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-box" style="background:#425466"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Slate</div>
+          <div class="swatch-hex">#425466</div>
+          <div class="swatch-role">Body text, secondary labels</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-box" style="background:#8898AA"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Mist</div>
+          <div class="swatch-hex">#8898AA</div>
+          <div class="swatch-role">Placeholder, tertiary text</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-box" style="background:#C4C9D4"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Cloud</div>
+          <div class="swatch-hex">#C4C9D4</div>
+          <div class="swatch-role">Borders, dividers, strokes</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-box" style="background:#E6EBF1"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Fog</div>
+          <div class="swatch-hex">#E6EBF1</div>
+          <div class="swatch-role">Subtle borders, hover states</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-box" style="background:#F6F9FC"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Off White</div>
+          <div class="swatch-hex">#F6F9FC</div>
+          <div class="swatch-role">Page background, surfaces</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-box" style="background:#00D4FF"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Sky</div>
+          <div class="swatch-hex">#00D4FF</div>
+          <div class="swatch-role">Dark bg accents, highlights</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div style="font-size:13px;font-weight:600;color:var(--stripe-slate);margin-bottom:16px">Semantic Colors</div>
+    <div class="card-grid">
+      <div class="color-swatch">
+        <div class="swatch-box" style="background:#24B47E"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Success Green</div>
+          <div class="swatch-hex">#24B47E</div>
+          <div class="swatch-role">Payments succeeded, positive states</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-box" style="background:#F5A623"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Warning Amber</div>
+          <div class="swatch-hex">#F5A623</div>
+          <div class="swatch-role">Pending, needs attention</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-box" style="background:#CD3D64"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Error Red</div>
+          <div class="swatch-hex">#CD3D64</div>
+          <div class="swatch-role">Failed payments, destructive actions</div>
+        </div>
+      </div>
+      <div class="color-swatch">
+        <div class="swatch-box" style="background:#F26D1E"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Alert Orange</div>
+          <div class="swatch-hex">#F26D1E</div>
+          <div class="swatch-role">Important notices, fraud alerts</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div style="font-size:13px;font-weight:600;color:var(--stripe-slate);margin-bottom:16px">Extended Violet Scale</div>
+    <div class="color-row">
+      <div class="color-row-label">Violet</div>
+      <div class="color-scale">
+        <div class="color-scale-step" style="background:#F0EEFF" title="#F0EEFF"><span>50</span></div>
+        <div class="color-scale-step" style="background:#E8E7FF"><span>100</span></div>
+        <div class="color-scale-step" style="background:#C4C0FF"><span>200</span></div>
+        <div class="color-scale-step" style="background:#9E96FF"><span>300</span></div>
+        <div class="color-scale-step" style="background:#7B72FF"><span>400</span></div>
+        <div class="color-scale-step" style="background:#635BFF"><span>500</span></div>
+        <div class="color-scale-step" style="background:#4F46E5"><span>600</span></div>
+        <div class="color-scale-step" style="background:#3730C0"><span>700</span></div>
+        <div class="color-scale-step" style="background:#261DA0"><span>800</span></div>
+        <div class="color-scale-step" style="background:#160E80"><span>900</span></div>
+      </div>
+    </div>
+    <div class="color-row">
+      <div class="color-row-label">Midnight</div>
+      <div class="color-scale">
+        <div class="color-scale-step" style="background:#F0F4F8"><span>50</span></div>
+        <div class="color-scale-step" style="background:#D9E4EF"><span>100</span></div>
+        <div class="color-scale-step" style="background:#8898AA"><span>300</span></div>
+        <div class="color-scale-step" style="background:#425466"><span>500</span></div>
+        <div class="color-scale-step" style="background:#2C3E55"><span>700</span></div>
+        <div class="color-scale-step" style="background:#0A2540"><span>900</span></div>
+      </div>
+    </div>
+    <div class="color-row">
+      <div class="color-row-label">Success</div>
+      <div class="color-scale">
+        <div class="color-scale-step" style="background:#D4EFDF"><span>100</span></div>
+        <div class="color-scale-step" style="background:#87D3B0"><span>300</span></div>
+        <div class="color-scale-step" style="background:#24B47E"><span>500</span></div>
+        <div class="color-scale-step" style="background:#147a50"><span>700</span></div>
+        <div class="color-scale-step" style="background:#0a4a2f"><span>900</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div style="font-size:13px;font-weight:600;color:var(--stripe-slate);margin-bottom:16px">Dark Mode Guidance</div>
+    <div style="background:#0A2540;border-radius:var(--radius-lg);padding:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div style="background:#1a3554;border-radius:var(--radius);padding:14px">
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em">Surface</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.85)">#1a3554 — card background</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.05);border-radius:var(--radius);padding:14px;border:1px solid rgba(255,255,255,0.1)">
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em">Border</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.85)">rgba(255,255,255,0.1)</div>
+      </div>
+      <div style="background:rgba(99,91,255,0.15);border-radius:var(--radius);padding:14px;border:1px solid rgba(99,91,255,0.3)">
+        <div style="font-size:11px;color:rgba(99,91,255,0.7);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em">Accent</div>
+        <div style="font-size:13px;color:#A39BFF">#A39BFF — violet lightened</div>
+      </div>
+      <div style="background:rgba(0,212,255,0.1);border-radius:var(--radius);padding:14px;border:1px solid rgba(0,212,255,0.2)">
+        <div style="font-size:11px;color:rgba(0,212,255,0.6);margin-bottom:6px;font-weight:600;text-transform:uppercase;letter-spacing:0.06em">Highlight</div>
+        <div style="font-size:13px;color:#00D4FF">#00D4FF — sky on dark bg</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TYPOGRAPHY PAGE -->
+<div id="page-typography" class="page">
+  <div class="section-title">Typography</div>
+  <div class="section-heading">Sora — expressive, precise</div>
+  <div class="section-desc">Stripe uses Sora as its primary typeface. Its geometric, humanist quality communicates both technical precision and warmth. JetBrains Mono is reserved for code and financial data.</div>
+
+  <div class="section">
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-badge">Display</span>
+        <span class="type-spec">64px / 700 / -1.5px tracking</span>
+      </div>
+      <div style="font-size:48px;font-weight:700;color:var(--stripe-midnight);line-height:1.1;letter-spacing:-1px">Grow your<br>revenue.</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-badge">H1</span>
+        <span class="type-spec">40px / 700 / -0.5px tracking</span>
+      </div>
+      <div style="font-size:36px;font-weight:700;color:var(--stripe-midnight);letter-spacing:-0.5px">Financial infrastructure</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-badge">H2</span>
+        <span class="type-spec">28px / 700 / -0.3px tracking</span>
+      </div>
+      <div style="font-size:28px;font-weight:700;color:var(--stripe-midnight)">Accept payments globally</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-badge">H3</span>
+        <span class="type-spec">20px / 600 / normal tracking</span>
+      </div>
+      <div style="font-size:20px;font-weight:600;color:var(--stripe-midnight)">Enable any billing model</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-badge">H4</span>
+        <span class="type-spec">16px / 600 / normal</span>
+      </div>
+      <div style="font-size:16px;font-weight:600;color:var(--stripe-midnight)">Set up recurring subscriptions</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-badge">Body Large</span>
+        <span class="type-spec">18px / 400 / 1.7 line-height</span>
+      </div>
+      <div style="font-size:18px;color:var(--stripe-slate);line-height:1.7;max-width:540px">Stripe's suite of products powers payments for some of the world's largest companies, allowing them to accept payments and send payouts globally.</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-badge">Body</span>
+        <span class="type-spec">16px / 400 / 1.65 line-height</span>
+      </div>
+      <div style="font-size:16px;color:var(--stripe-slate);line-height:1.65;max-width:540px">Build and scale your recurring business model with Stripe Billing. Intelligent payment flows, smart retries, and flexible pricing models built for modern SaaS.</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-badge">Body Small</span>
+        <span class="type-spec">14px / 400 / 1.6 line-height</span>
+      </div>
+      <div style="font-size:14px;color:var(--stripe-slate);line-height:1.6">Supported in 135+ currencies and payment methods. Fraud protection built in with Radar.</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-badge">Label</span>
+        <span class="type-spec">12px / 600 / 0.08em tracking</span>
+      </div>
+      <div style="font-size:12px;font-weight:600;color:var(--stripe-midnight);letter-spacing:0.04em">PAYMENT METHOD</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-badge">Eyebrow</span>
+        <span class="type-spec">11px / 700 / 0.12em tracking / uppercase</span>
+      </div>
+      <div style="font-size:11px;font-weight:700;color:var(--stripe-violet);letter-spacing:0.12em;text-transform:uppercase">Developer platform</div>
+    </div>
+    <div class="type-sample">
+      <div class="type-meta">
+        <span class="type-badge">Code</span>
+        <span class="type-spec">JetBrains Mono / 13px / 400</span>
+      </div>
+      <div class="code-block">
+<span class="code-keyword">const</span> stripe = <span class="code-keyword">require</span>(<span class="code-string">'stripe'</span>)(<span class="code-string">'sk_test_...'</span>);
+<span class="code-keyword">const</span> paymentIntent = <span class="code-keyword">await</span> stripe.<span class="code-property">paymentIntents</span>.create({
+  amount: <span class="code-number">2000</span>,
+  currency: <span class="code-string">'usd'</span>,
+});
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SPACING PAGE -->
+<div id="page-spacing" class="page">
+  <div class="section-title">Spacing & Layout</div>
+  <div class="section-heading">The 4px grid</div>
+  <div class="section-desc">All spacing in Stripe's system is based on a 4px base unit. This creates visual harmony and makes measurements predictable across the entire product.</div>
+
+  <div class="section">
+    <div style="font-size:13px;font-weight:600;color:var(--stripe-slate);margin-bottom:16px">Spacing Scale</div>
+    <div class="card" style="padding:24px">
+      <div class="space-row"><span class="space-label">4px</span><span class="space-name">xs — spacing-1</span><div class="space-bar" style="width:4px"></div><span class="space-use">Inline gaps, icon margins</span></div>
+      <div class="space-row"><span class="space-label">8px</span><span class="space-name">sm — spacing-2</span><div class="space-bar" style="width:8px"></div><span class="space-use">Tight element spacing</span></div>
+      <div class="space-row"><span class="space-label">12px</span><span class="space-name">md — spacing-3</span><div class="space-bar" style="width:12px"></div><span class="space-use">Inner padding, row gaps</span></div>
+      <div class="space-row"><span class="space-label">16px</span><span class="space-name">base — spacing-4</span><div class="space-bar" style="width:16px"></div><span class="space-use">Default component padding</span></div>
+      <div class="space-row"><span class="space-label">20px</span><span class="space-name">lg — spacing-5</span><div class="space-bar" style="width:20px"></div><span class="space-use">Form group spacing</span></div>
+      <div class="space-row"><span class="space-label">24px</span><span class="space-name">xl — spacing-6</span><div class="space-bar" style="width:24px"></div><span class="space-use">Card internal padding</span></div>
+      <div class="space-row"><span class="space-label">32px</span><span class="space-name">2xl — spacing-8</span><div class="space-bar" style="width:32px"></div><span class="space-use">Section gap, page margins</span></div>
+      <div class="space-row"><span class="space-label">40px</span><span class="space-name">3xl — spacing-10</span><div class="space-bar" style="width:40px"></div><span class="space-use">Large content sections</span></div>
+      <div class="space-row"><span class="space-label">48px</span><span class="space-name">4xl — spacing-12</span><div class="space-bar" style="width:48px"></div><span class="space-use">Page-level breathing room</span></div>
+      <div class="space-row"><span class="space-label">64px</span><span class="space-name">5xl — spacing-16</span><div class="space-bar" style="width:64px"></div><span class="space-use">Hero padding, major sections</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div style="font-size:13px;font-weight:600;color:var(--stripe-slate);margin-bottom:16px">Border Radius Scale</div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-end;padding:24px;background:white;border-radius:12px;border:1px solid var(--stripe-fog)">
+      <div style="text-align:center"><div style="width:32px;height:32px;border-radius:2px;background:var(--stripe-violet-light);border:1.5px solid var(--stripe-violet);margin:0 auto"></div><div style="font-size:10px;color:var(--stripe-mist);margin-top:6px;font-family:var(--mono)">2px</div><div style="font-size:10px;color:var(--stripe-slate)">Badge border</div></div>
+      <div style="text-align:center"><div style="width:36px;height:36px;border-radius:4px;background:var(--stripe-violet-light);border:1.5px solid var(--stripe-violet);margin:0 auto"></div><div style="font-size:10px;color:var(--stripe-mist);margin-top:6px;font-family:var(--mono)">4px</div><div style="font-size:10px;color:var(--stripe-slate)">Chip, tag</div></div>
+      <div style="text-align:center"><div style="width:40px;height:40px;border-radius:6px;background:var(--stripe-violet-light);border:1.5px solid var(--stripe-violet);margin:0 auto"></div><div style="font-size:10px;color:var(--stripe-mist);margin-top:6px;font-family:var(--mono)">6px</div><div style="font-size:10px;color:var(--stripe-slate)">Button, input</div></div>
+      <div style="text-align:center"><div style="width:48px;height:48px;border-radius:8px;background:var(--stripe-violet-light);border:1.5px solid var(--stripe-violet);margin:0 auto"></div><div style="font-size:10px;color:var(--stripe-mist);margin-top:6px;font-family:var(--mono)">8px</div><div style="font-size:10px;color:var(--stripe-slate)">Default card</div></div>
+      <div style="text-align:center"><div style="width:56px;height:56px;border-radius:12px;background:var(--stripe-violet-light);border:1.5px solid var(--stripe-violet);margin:0 auto"></div><div style="font-size:10px;color:var(--stripe-mist);margin-top:6px;font-family:var(--mono)">12px</div><div style="font-size:10px;color:var(--stripe-slate)">Modal, panel</div></div>
+      <div style="text-align:center"><div style="width:64px;height:64px;border-radius:20px;background:var(--stripe-violet-light);border:1.5px solid var(--stripe-violet);margin:0 auto"></div><div style="font-size:10px;color:var(--stripe-mist);margin-top:6px;font-family:var(--mono)">20px</div><div style="font-size:10px;color:var(--stripe-slate)">Feature card</div></div>
+      <div style="text-align:center"><div style="width:72px;height:36px;border-radius:100px;background:var(--stripe-violet-light);border:1.5px solid var(--stripe-violet);margin:0 auto"></div><div style="font-size:10px;color:var(--stripe-mist);margin-top:6px;font-family:var(--mono)">100px</div><div style="font-size:10px;color:var(--stripe-slate)">Pill, badge</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div style="font-size:13px;font-weight:600;color:var(--stripe-slate);margin-bottom:16px">12-Column Grid</div>
+    <div style="background:white;border:1px solid var(--stripe-fog);border-radius:var(--radius);padding:20px">
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:8px;margin-bottom:12px">
+        <div style="height:28px;background:rgba(99,91,255,0.08);border:1px dashed rgba(99,91,255,0.3);border-radius:3px;grid-column:span 12"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:8px;margin-bottom:12px">
+        <div style="height:28px;background:rgba(99,91,255,0.12);border:1px solid rgba(99,91,255,0.3);border-radius:3px;grid-column:span 4"></div>
+        <div style="height:28px;background:rgba(99,91,255,0.12);border:1px solid rgba(99,91,255,0.3);border-radius:3px;grid-column:span 4"></div>
+        <div style="height:28px;background:rgba(99,91,255,0.12);border:1px solid rgba(99,91,255,0.3);border-radius:3px;grid-column:span 4"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:8px;margin-bottom:12px">
+        <div style="height:28px;background:rgba(99,91,255,0.08);border:1px dashed rgba(99,91,255,0.3);border-radius:3px;grid-column:span 3"></div>
+        <div style="height:28px;background:rgba(99,91,255,0.16);border:1px solid rgba(99,91,255,0.4);border-radius:3px;grid-column:span 6"></div>
+        <div style="height:28px;background:rgba(99,91,255,0.08);border:1px dashed rgba(99,91,255,0.3);border-radius:3px;grid-column:span 3"></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(12,1fr);gap:8px">
+        <div style="height:28px;background:rgba(99,91,255,0.12);border:1px solid rgba(99,91,255,0.3);border-radius:3px;grid-column:span 3"></div>
+        <div style="height:28px;background:rgba(99,91,255,0.12);border:1px solid rgba(99,91,255,0.3);border-radius:3px;grid-column:span 3"></div>
+        <div style="height:28px;background:rgba(99,91,255,0.12);border:1px solid rgba(99,91,255,0.3);border-radius:3px;grid-column:span 3"></div>
+        <div style="height:28px;background:rgba(99,91,255,0.12);border:1px solid rgba(99,91,255,0.3);border-radius:3px;grid-column:span 3"></div>
+      </div>
+      <div style="display:flex;gap:16px;margin-top:12px;flex-wrap:wrap">
+        <div style="font-size:11px;color:var(--stripe-mist)">12 columns · 16px gutter · 32px margin · max-width 1280px</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPONENTS PAGE -->
+<div id="page-components" class="page">
+  <div class="section-title">Components</div>
+  <div class="section-heading">The building blocks</div>
+  <div class="section-desc">Stripe's component library is built for financial products — optimized for trust, clarity, and conversion. Each component has been battle-tested at scale.</div>
+
+  <div class="tab-strip">
+    <button class="tab-item active" onclick="showTab('buttons')">Buttons</button>
+    <button class="tab-item" onclick="showTab('forms')">Forms</button>
+    <button class="tab-item" onclick="showTab('feedback')">Feedback</button>
+    <button class="tab-item" onclick="showTab('data')">Data Display</button>
+    <button class="tab-item" onclick="showTab('payment')">Payment UI</button>
+  </div>
+
+  <div id="tab-buttons" class="tab-pane active">
+    <div class="section">
+      <div class="comp-label">Button Variants</div>
+      <div class="comp-row">
+        <button class="btn btn-primary">Get started</button>
+        <button class="btn btn-secondary">View docs</button>
+        <button class="btn btn-ghost">Learn more →</button>
+        <button class="btn btn-dark">Contact sales</button>
+        <button class="btn btn-danger">Delete account</button>
+      </div>
+      <div class="comp-label">Sizes</div>
+      <div class="comp-row" style="align-items:center">
+        <button class="btn btn-primary btn-sm">Small</button>
+        <button class="btn btn-primary">Default</button>
+        <button class="btn btn-primary btn-lg">Large</button>
+      </div>
+      <div class="comp-label">States</div>
+      <div class="comp-row">
+        <button class="btn btn-primary" style="opacity:0.5;cursor:not-allowed">Disabled</button>
+        <button class="btn btn-primary" style="background:#4F46E5;box-shadow:0 3px 10px rgba(99,91,255,0.3)">Hover</button>
+        <button class="btn btn-primary" style="display:flex;align-items:center;gap:8px">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          Loading...
+        </button>
+        <button class="btn btn-primary" style="background:var(--stripe-green)">
+          <i class="ti ti-check" style="font-size:14px"></i> Succeeded
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-forms" class="tab-pane">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+      <div>
+        <div class="comp-label">Input States</div>
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input class="form-input" type="email" placeholder="you@example.com">
+          <div class="form-hint">We'll only use this to send receipts.</div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Amount</label>
+          <input class="form-input success" type="text" value="$199.00">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Card number</label>
+          <input class="form-input error" type="text" value="4242 4242 4242 XXXX">
+          <div class="form-error">Your card number is invalid.</div>
+        </div>
+      </div>
+      <div>
+        <div class="comp-label">Select & Textarea</div>
+        <div class="form-group">
+          <label class="form-label">Currency</label>
+          <select class="form-input" style="cursor:pointer;appearance:none;background-image:url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><path fill=%22%23425466%22 d=%22M4 6l4 4 4-4%22 stroke=%22%23425466%22 stroke-width=%221.5%22 fill=%22none%22/></svg>');background-repeat:no-repeat;background-position:right 10px center;padding-right:28px">
+            <option>USD — US Dollar</option>
+            <option>EUR — Euro</option>
+            <option>GBP — British Pound</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description (optional)</label>
+          <textarea class="form-input" rows="3" style="resize:vertical" placeholder="Payment for invoice #1234..."></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-feedback" class="tab-pane">
+    <div class="comp-label">Status Badges</div>
+    <div class="comp-row">
+      <span class="badge badge-success"><i class="ti ti-check" style="font-size:10px"></i> Succeeded</span>
+      <span class="badge badge-warning">⏳ Pending</span>
+      <span class="badge badge-error"><i class="ti ti-x" style="font-size:10px"></i> Failed</span>
+      <span class="badge badge-info"><i class="ti ti-clock" style="font-size:10px"></i> Processing</span>
+      <span class="badge badge-neutral">Refunded</span>
+    </div>
+    <div class="comp-label" style="margin-top:20px">Alert / Banner</div>
+    <div style="background:#EBF8F1;border:1px solid #24B47E;border-radius:var(--radius);padding:12px 16px;display:flex;gap:10px;margin-bottom:10px">
+      <i class="ti ti-circle-check" style="color:var(--stripe-green);font-size:18px;flex-shrink:0;margin-top:1px"></i>
+      <div><div style="font-size:13px;font-weight:600;color:#147a50">Payment succeeded</div><div style="font-size:12px;color:#147a50;margin-top:2px">$1,234.00 was charged to Visa ending in 4242.</div></div>
+    </div>
+    <div style="background:var(--stripe-amber-light);border:1px solid var(--stripe-amber);border-radius:var(--radius);padding:12px 16px;display:flex;gap:10px;margin-bottom:10px">
+      <i class="ti ti-alert-triangle" style="color:#8a5500;font-size:18px;flex-shrink:0;margin-top:1px"></i>
+      <div><div style="font-size:13px;font-weight:600;color:#8a5500">Action required</div><div style="font-size:12px;color:#8a5500;margin-top:2px">Your bank requires additional verification. Complete 3D Secure.</div></div>
+    </div>
+    <div style="background:var(--stripe-red-light);border:1px solid var(--stripe-red);border-radius:var(--radius);padding:12px 16px;display:flex;gap:10px">
+      <i class="ti ti-circle-x" style="color:#9e1e3a;font-size:18px;flex-shrink:0;margin-top:1px"></i>
+      <div><div style="font-size:13px;font-weight:600;color:#9e1e3a">Payment failed</div><div style="font-size:12px;color:#9e1e3a;margin-top:2px">Insufficient funds. Please try a different card.</div></div>
+    </div>
+  </div>
+
+  <div id="tab-data" class="tab-pane">
+    <div class="comp-label">Metrics</div>
+    <div class="metric-grid">
+      <div class="metric-card">
+        <div class="metric-label">Revenue</div>
+        <div class="metric-value">$48.2K</div>
+        <div class="metric-delta delta-up">↑ 12.4% this month</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Transactions</div>
+        <div class="metric-value">3,847</div>
+        <div class="metric-delta delta-up">↑ 8.1%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Success Rate</div>
+        <div class="metric-value">98.7%</div>
+        <div class="metric-delta delta-up">↑ 0.3%</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Disputes</div>
+        <div class="metric-value">0.04%</div>
+        <div class="metric-delta delta-down">↓ 0.01%</div>
+      </div>
+    </div>
+    <div class="comp-label">Transaction List</div>
+    <div style="background:white;border:1px solid var(--stripe-fog);border-radius:var(--radius-lg);padding:8px 16px">
+      <div class="list-item">
+        <div class="list-avatar" style="background:#E8E7FF;color:var(--stripe-violet)">AC</div>
+        <div><div class="list-name">Anthropic</div><div class="list-sub">May 29 · Invoice #1401</div></div>
+        <span class="badge badge-success" style="margin-left:auto;margin-right:12px">Succeeded</span>
+        <div class="list-amount">$12,500.00</div>
+      </div>
+      <div class="list-item">
+        <div class="list-avatar" style="background:#D4EFDF;color:#147a50">SH</div>
+        <div><div class="list-name">Shopify</div><div class="list-sub">May 28 · Subscription</div></div>
+        <span class="badge badge-success" style="margin-left:auto;margin-right:12px">Succeeded</span>
+        <div class="list-amount">$3,200.00</div>
+      </div>
+      <div class="list-item">
+        <div class="list-avatar" style="background:var(--stripe-amber-light);color:#8a5500">FS</div>
+        <div><div class="list-name">Figma Studios</div><div class="list-sub">May 28 · Retry 2/3</div></div>
+        <span class="badge badge-warning" style="margin-left:auto;margin-right:12px">Pending</span>
+        <div class="list-amount">$890.00</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="tab-payment" class="tab-pane">
+    <div class="comp-label">Payment Form (Stripe Elements style)</div>
+    <div class="payment-card">
+      <div class="payment-header">
+        <div class="payment-brand">Checkout</div>
+        <div class="payment-amount">$99.00</div>
+        <div style="font-size:12px;opacity:0.5;margin-top:4px">Stripe Pro Plan · Monthly</div>
+      </div>
+      <div class="payment-body">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Card information</label>
+          <div class="card-input-group">
+            <input class="card-input-part" style="flex:1" placeholder="1234 1234 1234 1234">
+            <div class="card-divider"></div>
+            <input class="card-input-part" style="width:64px" placeholder="MM/YY">
+            <div class="card-divider"></div>
+            <input class="card-input-part" style="width:52px" placeholder="CVC">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Name on card</label>
+          <input class="form-input" type="text" placeholder="Jane Doe">
+        </div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;padding:12px">
+          <i class="ti ti-lock" style="font-size:14px"></i> Pay $99.00
+        </button>
+        <div style="text-align:center;font-size:11px;color:var(--stripe-mist);margin-top:12px">Secured by Stripe · 256-bit TLS encryption</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PATTERNS PAGE -->
+<div id="page-patterns" class="page">
+  <div class="section-title">UI Patterns</div>
+  <div class="section-heading">Recurring design solutions</div>
+  <div class="section-desc">These patterns represent common user tasks in Stripe's product. Each has been optimized for clarity, speed, and trust.</div>
+
+  <div class="section">
+    <div style="font-size:13px;font-weight:600;color:var(--stripe-slate);margin-bottom:16px">Navigation Patterns</div>
+    <div class="card" style="padding:0;overflow:hidden">
+      <div style="background:white;border-bottom:1px solid var(--stripe-fog);padding:0 16px;display:flex;align-items:center;height:48px;gap:4px">
+        <div style="width:8px;height:8px;border-radius:50%;background:#FF5F57;margin-right:2px"></div>
+        <div style="width:8px;height:8px;border-radius:50%;background:#FEBC2E;margin-right:2px"></div>
+        <div style="width:8px;height:8px;border-radius:50%;background:#28C840;margin-right:12px"></div>
+        <div style="font-size:12px;color:var(--stripe-mist);font-family:var(--mono)">dashboard.stripe.com</div>
+      </div>
+      <div style="display:flex;height:280px">
+        <div style="width:180px;background:#F6F9FC;border-right:1px solid var(--stripe-fog);padding:16px 0;flex-shrink:0">
+          <div style="padding:0 12px;margin-bottom:16px;font-size:11px;font-weight:700;color:var(--stripe-mist);letter-spacing:0.08em;text-transform:uppercase">Business</div>
+          <div style="padding:8px 12px;display:flex;align-items:center;gap:8px;background:var(--stripe-violet-light);border-radius:6px;margin:0 8px 2px"><i class="ti ti-chart-bar" style="font-size:15px;color:var(--stripe-violet)"></i><span style="font-size:13px;font-weight:600;color:var(--stripe-violet)">Overview</span></div>
+          <div style="padding:8px 12px;display:flex;align-items:center;gap:8px;margin:0 8px 2px"><i class="ti ti-credit-card" style="font-size:15px;color:var(--stripe-mist)"></i><span style="font-size:13px;color:var(--stripe-slate)">Payments</span></div>
+          <div style="padding:8px 12px;display:flex;align-items:center;gap:8px;margin:0 8px 2px"><i class="ti ti-users" style="font-size:15px;color:var(--stripe-mist)"></i><span style="font-size:13px;color:var(--stripe-slate)">Customers</span></div>
+          <div style="padding:8px 12px;display:flex;align-items:center;gap:8px;margin:0 8px 2px"><i class="ti ti-file-invoice" style="font-size:15px;color:var(--stripe-mist)"></i><span style="font-size:13px;color:var(--stripe-slate)">Billing</span></div>
+          <div style="padding:0 12px;margin:16px 0 8px;font-size:11px;font-weight:700;color:var(--stripe-mist);letter-spacing:0.08em;text-transform:uppercase">Developers</div>
+          <div style="padding:8px 12px;display:flex;align-items:center;gap:8px;margin:0 8px 2px"><i class="ti ti-code" style="font-size:15px;color:var(--stripe-mist)"></i><span style="font-size:13px;color:var(--stripe-slate)">API keys</span></div>
+          <div style="padding:8px 12px;display:flex;align-items:center;gap:8px;margin:0 8px 2px"><i class="ti ti-webhook" style="font-size:15px;color:var(--stripe-mist)"></i><span style="font-size:13px;color:var(--stripe-slate)">Webhooks</span></div>
+        </div>
+        <div style="flex:1;padding:20px;overflow:hidden">
+          <div style="font-size:14px;font-weight:700;color:var(--stripe-midnight);margin-bottom:16px">Today's overview</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+            <div class="metric-card"><div class="metric-label">Volume</div><div style="font-size:18px;font-weight:700;color:var(--stripe-midnight)">$8,420</div></div>
+            <div class="metric-card"><div class="metric-label">Txns</div><div style="font-size:18px;font-weight:700;color:var(--stripe-midnight)">342</div></div>
+            <div class="metric-card"><div class="metric-label">New customers</div><div style="font-size:18px;font-weight:700;color:var(--stripe-midnight)">18</div></div>
+          </div>
+          <div style="margin-top:14px;background:white;border:1px solid var(--stripe-fog);border-radius:8px;padding:12px">
+            <div style="font-size:12px;font-weight:600;color:var(--stripe-midnight);margin-bottom:10px">Recent transactions</div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--stripe-slate);padding:6px 0;border-bottom:1px solid var(--stripe-fog)"><span>cus_Nk28ZLRx</span><span class="badge badge-success" style="padding:2px 7px;font-size:10px">$420.00</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--stripe-slate);padding:6px 0;border-bottom:1px solid var(--stripe-fog)"><span>cus_9mXYq7Pz</span><span class="badge badge-success" style="padding:2px 7px;font-size:10px">$89.00</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--stripe-slate);padding:6px 0"><span>cus_3fGhLbNw</span><span class="badge badge-warning" style="padding:2px 7px;font-size:10px">$299.00</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div style="font-size:13px;font-weight:600;color:var(--stripe-slate);margin-bottom:16px">Empty States & Loading</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div class="card" style="text-align:center;padding:32px 20px">
+        <div style="width:48px;height:48px;background:var(--stripe-fog);border-radius:12px;margin:0 auto 14px;display:flex;align-items:center;justify-content:center"><i class="ti ti-credit-card" style="font-size:22px;color:var(--stripe-cloud)"></i></div>
+        <div style="font-size:14px;font-weight:600;color:var(--stripe-midnight);margin-bottom:6px">No payments yet</div>
+        <div style="font-size:12px;color:var(--stripe-mist);margin-bottom:16px">Start accepting payments to see transactions here.</div>
+        <button class="btn btn-primary btn-sm">Create payment link</button>
+      </div>
+      <div class="card" style="padding:24px">
+        <div style="font-size:12px;font-weight:600;color:var(--stripe-slate);margin-bottom:12px">LOADING STATE</div>
+        <div style="height:14px;background:var(--stripe-fog);border-radius:4px;margin-bottom:10px;animation:pulse 1.5s ease-in-out infinite"></div>
+        <div style="height:14px;background:var(--stripe-fog);border-radius:4px;margin-bottom:10px;width:75%;animation:pulse 1.5s ease-in-out 0.1s infinite"></div>
+        <div style="height:14px;background:var(--stripe-fog);border-radius:4px;width:50%;animation:pulse 1.5s ease-in-out 0.2s infinite"></div>
+        <style>@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}</style>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRINCIPLES PAGE -->
+<div id="page-principles" class="page">
+  <div class="section-title">Design Principles</div>
+  <div class="section-heading">How we think about design</div>
+  <div class="section-desc">These principles guide every decision in Stripe's design process — from the shape of a button to the information architecture of a complex flow.</div>
+
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div class="principle-card">
+      <div class="principle-num">Principle 01</div>
+      <div class="principle-name">Clarity over cleverness</div>
+      <div class="principle-desc">Financial products require absolute clarity. Users must understand what's happening with their money at all times. We never sacrifice comprehension for visual interest. The simplest solution that communicates clearly is almost always the right one.</div>
+      <div class="principle-do-dont">
+        <div class="do-box"><strong>Do</strong>Use plain language for payment states. "Payment succeeded" not "Transaction completed successfully."</div>
+        <div class="dont-box"><strong>Don't</strong>Use ambiguous icons or metaphors for financial states that require precise communication.</div>
+      </div>
+    </div>
+
+    <div class="principle-card" style="border-left-color:var(--stripe-teal)">
+      <div class="principle-num" style="color:var(--stripe-teal)">Principle 02</div>
+      <div class="principle-name">Infrastructure feels invisible</div>
+      <div class="principle-desc">The best infrastructure is the kind you don't notice. Our UI should surface insights and actions — not itself. Components should feel like natural extensions of the user's workflow, not tools they have to learn.</div>
+      <div class="principle-do-dont">
+        <div class="do-box"><strong>Do</strong>Surface relevant data at the moment it's needed. Show fraud alerts inline with the transaction.</div>
+        <div class="dont-box"><strong>Don't</strong>Add UI chrome, decorative elements, or features that don't serve an immediate user need.</div>
+      </div>
+    </div>
+
+    <div class="principle-card" style="border-left-color:var(--stripe-green)">
+      <div class="principle-num" style="color:var(--stripe-green)">Principle 03</div>
+      <div class="principle-name">Trust is earned in details</div>
+      <div class="principle-desc">Trust isn't declared — it's demonstrated through consistent behavior, precise alignment, reliable interactions, and honest communication. Every pixel inconsistency or unclear error message erodes the confidence a user places in us with their financial operations.</div>
+      <div class="principle-do-dont">
+        <div class="do-box"><strong>Do</strong>Show exact amounts, precise timestamps, and complete status information. Never approximate financial data.</div>
+        <div class="dont-box"><strong>Don't</strong>Round numbers in financial contexts, use vague relative times ("a while ago"), or hide error details.</div>
+      </div>
+    </div>
+
+    <div class="principle-card" style="border-left-color:var(--stripe-amber)">
+      <div class="principle-num" style="color:var(--stripe-amber)">Principle 04</div>
+      <div class="principle-name">Global scale, local feel</div>
+      <div class="principle-desc">Stripe operates in 135+ countries. Our design system must work across cultures, scripts, and contexts without losing coherence. Localization is not an afterthought — it's built into the foundation. RTL, international number formats, and currency representations are first-class concerns.</div>
+      <div class="principle-do-dont">
+        <div class="do-box"><strong>Do</strong>Design layouts that accommodate LTR and RTL. Use locale-aware number and currency formatting throughout.</div>
+        <div class="dont-box"><strong>Don't</strong>Hardcode currency symbols, assume left-to-right reading, or use culturally specific idioms in copy.</div>
+      </div>
+    </div>
+
+    <div class="principle-card" style="border-left-color:var(--stripe-red)">
+      <div class="principle-num" style="color:var(--stripe-red)">Principle 05</div>
+      <div class="principle-name">Progressive disclosure</div>
+      <div class="principle-desc">Stripe's product is powerful and complex. We reveal complexity progressively — starting with what 80% of users need, then offering depth for advanced use cases. The API shows everything; the dashboard shows what matters. Power users can always go deeper.</div>
+      <div class="principle-do-dont">
+        <div class="do-box"><strong>Do</strong>Put the most common action first. Advanced settings live in secondary panels. "Advanced options" collapses non-essential fields.</div>
+        <div class="dont-box"><strong>Don't</strong>Front-load complexity. Every setting shown by default is a setting the user has to process and reject.</div>
+      </div>
+    </div>
+
+    <div class="principle-card" style="border-left-color:#00B4A0">
+      <div class="principle-num" style="color:#00B4A0">Principle 06</div>
+      <div class="principle-name">Developer experience is user experience</div>
+      <div class="principle-desc">Stripe's primary users are developers. Code samples are UI. API responses are content. Documentation is design. The DX principles of clear naming, predictable behavior, and helpful error messages apply to the visual product too.</div>
+      <div class="principle-do-dont">
+        <div class="do-box"><strong>Do</strong>Use the same terminology in the UI as in the API. If the API has `payment_intent`, the dashboard says "payment intent."</div>
+        <div class="dont-box"><strong>Don't</strong>Create marketing-speak names in the UI that diverge from the underlying technical model. This creates confusion for developers.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VOICE PAGE -->
+<div id="page-voice" class="page">
+  <div class="section-title">Voice & Tone</div>
+  <div class="section-heading">How Stripe communicates</div>
+  <div class="section-desc">Stripe writes like a knowledgeable colleague — smart, direct, and respectful of your time. The voice is consistent; the tone adapts to context.</div>
+
+  <div class="section">
+    <div style="font-size:13px;font-weight:600;color:var(--stripe-slate);margin-bottom:16px">Core Voice Attributes</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px">
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;color:var(--stripe-midnight);margin-bottom:6px">Clear, not dumbed-down</div>
+        <div style="font-size:12px;color:var(--stripe-slate);line-height:1.6">We respect our users' intelligence. Jargon is used only when it's precise and familiar. Plain language wins — but we don't over-explain.</div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;color:var(--stripe-midnight);margin-bottom:6px">Direct, not terse</div>
+        <div style="font-size:12px;color:var(--stripe-slate);line-height:1.6">Get to the point. No filler phrases like "Please note that..." or "We wanted to let you know..." Say what you mean, then stop.</div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;color:var(--stripe-midnight);margin-bottom:6px">Optimistic, not cheerful</div>
+        <div style="font-size:12px;color:var(--stripe-slate);line-height:1.6">We believe in builders. The tone is grounded and encouraging — not bouncy or exclamation-heavy. "Start building" not "Let's go! 🚀"</div>
+      </div>
+      <div class="card">
+        <div style="font-size:13px;font-weight:700;color:var(--stripe-midnight);margin-bottom:6px">Expert, not boastful</div>
+        <div style="font-size:12px;color:var(--stripe-slate);line-height:1.6">We have deep expertise. We share it plainly — no inflated claims, no buzzwords. "99.999% uptime" not "industry-leading reliability."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div style="font-size:13px;font-weight:600;color:var(--stripe-slate);margin-bottom:16px">Copy Examples</div>
+
+    <div style="font-size:12px;font-weight:700;letter-spacing:0.04em;color:var(--stripe-slate);margin-bottom:8px;text-transform:uppercase">Error Messages</div>
+    <div class="vt-example">
+      <div class="vt-mark vt-good">✓</div>
+      <div><div class="vt-text">Your card was declined. Check that the card number, expiry, and CVC are correct, then try again.</div><div class="vt-sub">Specific cause + actionable next step</div></div>
+    </div>
+    <div class="vt-example">
+      <div class="vt-mark vt-bad">✗</div>
+      <div><div class="vt-text">An error occurred while processing your payment. Please try again later.</div><div class="vt-sub">Vague, no guidance, unhelpful</div></div>
+    </div>
+
+    <div style="font-size:12px;font-weight:700;letter-spacing:0.04em;color:var(--stripe-slate);margin-bottom:8px;margin-top:20px;text-transform:uppercase">Empty States</div>
+    <div class="vt-example">
+      <div class="vt-mark vt-good">✓</div>
+      <div><div class="vt-text">No customers yet. Share your payment link or integrate the API to start accepting payments.</div><div class="vt-sub">Explains the state, offers clear paths forward</div></div>
+    </div>
+    <div class="vt-example">
+      <div class="vt-mark vt-bad">✗</div>
+      <div><div class="vt-text">You don't have any customers yet! Get started today and grow your business.</div><div class="vt-sub">Overly cheerful, no actionable direction</div></div>
+    </div>
+
+    <div style="font-size:12px;font-weight:700;letter-spacing:0.04em;color:var(--stripe-slate);margin-bottom:8px;margin-top:20px;text-transform:uppercase">Button Labels</div>
+    <div class="comp-row">
+      <div class="card" style="padding:12px 16px">
+        <div style="font-size:11px;color:var(--stripe-green);font-weight:700;margin-bottom:6px">GOOD</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <button class="btn btn-primary btn-sm">Create invoice</button>
+          <button class="btn btn-secondary btn-sm">View payment</button>
+          <button class="btn btn-dark btn-sm">Export CSV</button>
+        </div>
+        <div style="font-size:11px;color:var(--stripe-slate);margin-top:8px">Verb + noun, specific action</div>
+      </div>
+      <div class="card" style="padding:12px 16px">
+        <div style="font-size:11px;color:var(--stripe-red);font-weight:700;margin-bottom:6px">AVOID</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px">
+          <button class="btn btn-secondary btn-sm">Click here</button>
+          <button class="btn btn-secondary btn-sm">Submit</button>
+          <button class="btn btn-secondary btn-sm">OK</button>
+        </div>
+        <div style="font-size:11px;color:var(--stripe-slate);margin-top:8px">Generic, non-descriptive labels</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div style="font-size:13px;font-weight:600;color:var(--stripe-slate);margin-bottom:16px">Tone by Context</div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="display:grid;grid-template-columns:160px 1fr;gap:0;border:1px solid var(--stripe-fog);border-radius:var(--radius);overflow:hidden">
+        <div style="background:var(--stripe-fog);padding:12px 14px;font-size:12px;font-weight:700;color:var(--stripe-midnight);display:flex;align-items:center">🎉 Success</div>
+        <div style="background:white;padding:12px 14px;font-size:13px;color:var(--stripe-slate)">Brief celebration + confirmation. "Payment received. A receipt is on its way to jan@example.com."</div>
+      </div>
+      <div style="display:grid;grid-template-columns:160px 1fr;gap:0;border:1px solid var(--stripe-fog);border-radius:var(--radius);overflow:hidden">
+        <div style="background:var(--stripe-fog);padding:12px 14px;font-size:12px;font-weight:700;color:var(--stripe-midnight);display:flex;align-items:center">⚠️ Warning</div>
+        <div style="background:white;padding:12px 14px;font-size:13px;color:var(--stripe-slate)">Calm, factual, never alarming. "Your payout is on hold. Complete identity verification to continue."</div>
+      </div>
+      <div style="display:grid;grid-template-columns:160px 1fr;gap:0;border:1px solid var(--stripe-fog);border-radius:var(--radius);overflow:hidden">
+        <div style="background:var(--stripe-fog);padding:12px 14px;font-size:12px;font-weight:700;color:var(--stripe-midnight);display:flex;align-items:center">❌ Error</div>
+        <div style="background:white;padding:12px 14px;font-size:13px;color:var(--stripe-slate)">Specific cause + clear next step. Never blame the user. "We couldn't process this payment. The card's billing zip code didn't match."</div>
+      </div>
+      <div style="display:grid;grid-template-columns:160px 1fr;gap:0;border:1px solid var(--stripe-fog);border-radius:var(--radius);overflow:hidden">
+        <div style="background:var(--stripe-fog);padding:12px 14px;font-size:12px;font-weight:700;color:var(--stripe-midnight);display:flex;align-items:center">🔒 Security</div>
+        <div style="background:white;padding:12px 14px;font-size:13px;color:var(--stripe-slate)">Serious, transparent, factual. "We've locked your account after unusual activity. Contact support to restore access."</div>
+      </div>
+      <div style="display:grid;grid-template-columns:160px 1fr;gap:0;border:1px solid var(--stripe-fog);border-radius:var(--radius);overflow:hidden">
+        <div style="background:var(--stripe-fog);padding:12px 14px;font-size:12px;font-weight:700;color:var(--stripe-midnight);display:flex;align-items:center">📚 Onboarding</div>
+        <div style="background:white;padding:12px 14px;font-size:13px;color:var(--stripe-slate)">Welcoming, clear, momentum-building. "You're almost ready to accept payments. Add your bank account to start receiving payouts."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function showTab(name) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
