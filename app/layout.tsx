@@ -26,6 +26,11 @@ export const metadata: Metadata = {
     "Software development, web & mobile apps, IT consultancy, and premium hardware sales. Your trusted technology partner in Nigeria.",
   keywords:
     "software development Nigeria, mobile app development Nigeria, web development company Nigeria, IT consultancy Nigeria, buy laptops Nigeria",
+  icons: {
+    icon: "/marvel.jpg",
+    shortcut: "/marvel.jpg",
+    apple: "/marvel.jpg",
+  },
   openGraph: {
     title: "Marvel Technological Innovations | Nigeria Tech Company",
     description:
