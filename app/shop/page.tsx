@@ -287,6 +287,43 @@ export default function ShopPage() {
   );
 }
 
+function ProductImage({ product }: { product: Product }) {
+  const [imgError, setImgError] = useState(false);
+
+  if (!product.image || imgError) {
+    return (
+      <span
+        style={{
+          fontSize: "70px",
+          position: "relative",
+          zIndex: 1,
+          filter: "drop-shadow(0 6px 12px rgba(0,0,0,0.35))",
+          lineHeight: 1,
+        }}
+      >
+        {product.emoji}
+      </span>
+    );
+  }
+
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={product.image}
+      alt={product.name}
+      onError={() => setImgError(true)}
+      style={{
+        width: "100%",
+        height: "100%",
+        objectFit: "contain",
+        position: "relative",
+        zIndex: 1,
+        padding: "16px",
+      }}
+    />
+  );
+}
+
 function ProductCard({
   product,
   added,
@@ -333,6 +370,7 @@ function ProductCard({
           justifyContent: "center",
           position: "relative",
           flexShrink: 0,
+          overflow: "hidden",
         }}
       >
         {/* Subtle radial highlight */}
@@ -343,17 +381,7 @@ function ProductCard({
             backgroundImage: "radial-gradient(circle at 30% 25%, rgba(255,255,255,0.12) 0%, transparent 65%)",
           }}
         />
-        <span
-          style={{
-            fontSize: "70px",
-            position: "relative",
-            zIndex: 1,
-            filter: "drop-shadow(0 6px 12px rgba(0,0,0,0.35))",
-            lineHeight: 1,
-          }}
-        >
-          {product.emoji}
-        </span>
+        <ProductImage product={product} />
 
         {/* Badge */}
         {product.badge && (

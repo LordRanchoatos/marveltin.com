@@ -41,6 +41,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "dell-xps-15-9530",
     name: "Dell XPS 15 9530",
+    image: "/Dell XPS 15 9530.jpeg",
     brand: "Dell",
     category: "laptops",
     price: 1150000,
@@ -57,6 +58,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "hp-elitebook-840-g10",
     name: "HP EliteBook 840 G10",
+    image: "/HP EliteBook 840 G10.jpeg",
     brand: "HP",
     category: "laptops",
     price: 580000,
@@ -72,6 +74,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "lenovo-thinkpad-x1-carbon",
     name: "ThinkPad X1 Carbon Gen 11",
+    image: "/ThinkPad X1 Carbon Gen 11.jpg",
     brand: "Lenovo",
     category: "laptops",
     price: 720000,
@@ -89,6 +92,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "apple-macbook-air-m2",
     name: "MacBook Air 15″ (M2)",
+    image: "/MacBook Air 15″ (M2).jpeg",
     brand: "Apple",
     category: "laptops",
     price: 950000,
@@ -105,6 +109,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "acer-swift-3",
     name: "Acer Swift 3 (SF314-56)",
+    image: "/Acer Swift 3 (SF314-56).jpeg",
     brand: "Acer",
     category: "laptops",
     price: 265000,
@@ -122,6 +127,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "iphone-15-pro",
     name: "iPhone 15 Pro (256GB)",
+    image: "/iPhone 15 Pro (256GB).jpeg",
     brand: "Apple",
     category: "phones",
     price: 860000,
@@ -138,6 +144,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "samsung-galaxy-s24-ultra",
     name: "Samsung Galaxy S24 Ultra",
+    image: "/Samsung Galaxy S24 Ultra.jpeg",
     brand: "Samsung",
     category: "phones",
     price: 740000,
@@ -154,6 +161,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "samsung-galaxy-tab-s9-fe",
     name: "Galaxy Tab S9 FE + S Pen",
+    image: "/Galaxy Tab S9 FE + S Pen.jpeg",
     brand: "Samsung",
     category: "phones",
     price: 320000,
@@ -169,6 +177,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "ipad-air-m2",
     name: "iPad Air 11-inch (M2)",
+    image: "/iPad Air 11-inch (M2).jpeg",
     brand: "Apple",
     category: "phones",
     price: 590000,
@@ -185,6 +194,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "xiaomi-redmi-note-13-pro-plus",
     name: "Xiaomi Redmi Note 13 Pro+",
+    image: "/Xiaomi Redmi Note 13 Pro+.jpeg",
     brand: "Xiaomi",
     category: "phones",
     price: 195000,
@@ -202,6 +212,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "ubiquiti-udm-pro",
     name: "UniFi Dream Machine Pro",
+    image: "/UniFi Dream Machine Pro.jpeg",
     brand: "Ubiquiti",
     category: "networking",
     price: 525000,
@@ -217,6 +228,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "mikrotik-crs326",
     name: "MikroTik CRS326-24G-2S+RM",
+    image: "/MikroTik CRS326-24G-2S+RM.jpeg",
     brand: "MikroTik",
     category: "networking",
     price: 185000,
@@ -232,6 +244,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "qnap-ts-464",
     name: "QNAP TS-464 NAS (4-Bay)",
+    image: "/QNAP TS-464 NAS (4-Bay).jpeg",
     brand: "QNAP",
     category: "networking",
     price: 460000,
@@ -248,6 +261,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "tp-link-archer-axe75",
     name: "TP-Link Archer AXE75 WiFi 6E",
+    image: "/TP-Link Archer AXE75 WiFi 6E.jpeg",
     brand: "TP-Link",
     category: "networking",
     price: 98000,
@@ -263,6 +277,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "dell-poweredge-t150",
     name: "Dell PowerEdge T150 Tower Server",
+    image: "/Dell PowerEdge T150 Tower Server.jpeg",
     brand: "Dell",
     category: "networking",
     price: 780000,
@@ -281,6 +296,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "lg-ultrafine-27",
     name: 'LG UltraFine 27" 4K IPS Monitor',
+    image: '/LG UltraFine 27" 4K IPS Monitor.jpeg',
     brand: "LG",
     category: "peripherals",
     price: 330000,
@@ -296,6 +312,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "logitech-mx-combo",
     name: "Logitech MX Keys S + MX Master 3S",
+    image: "/Logitech MX Keys S + MX Master 3S.jpeg",
     brand: "Logitech",
     category: "peripherals",
     price: 88000,
@@ -313,6 +330,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "samsung-t9-ssd-2tb",
     name: "Samsung 2TB T9 Portable SSD",
+    image: "/Samsung 2TB T9 Portable SSD.jpeg",
     brand: "Samsung",
     category: "peripherals",
     price: 110000,
@@ -328,6 +346,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "sony-wh-1000xm5",
     name: "Sony WH-1000XM5 Headphones",
+    image: "/Sony WH-1000XM5 Headphones.jpeg",
     brand: "Sony",
     category: "peripherals",
     price: 120000,
@@ -344,6 +363,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "anker-usbc-dock",
     name: "Anker 13-in-1 USB-C Docking Station",
+    image: "/Anker 13-in-1 USB-C Docking Station.jpeg",
     brand: "Anker",
     category: "peripherals",
     price: 72000,
@@ -361,6 +381,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "nvidia-rtx-4080-super",
     name: "NVIDIA GeForce RTX 4080 SUPER",
+    image: "/NVIDIA GeForce RTX 4080 SUPER.jpeg",
     brand: "NVIDIA",
     category: "ai-hardware",
     price: 1850000,
@@ -377,6 +398,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "nvidia-jetson-orin-nx",
     name: "NVIDIA Jetson Orin NX (16GB)",
+    image: "/NVIDIA Jetson Orin NX (16GB).jpeg",
     brand: "NVIDIA",
     category: "ai-hardware",
     price: 385000,
@@ -393,6 +415,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "intel-core-i9-14900k",
     name: "Intel Core i9-14900K Processor",
+    image: "/Intel Core i9-14900K Processor.jpeg",
     brand: "Intel",
     category: "ai-hardware",
     price: 465000,
@@ -408,6 +431,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "raspberry-pi-5-kit",
     name: "Raspberry Pi 5 (8GB) Starter Kit",
+    image: "/Raspberry Pi 5 (8GB) Starter Kit.jpeg",
     brand: "Raspberry Pi",
     category: "ai-hardware",
     price: 98000,
@@ -423,6 +447,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "coral-usb-accelerator",
     name: "Google Coral USB Edge TPU",
+    image: "/Google Coral USB Edge TPU.jpeg",
     brand: "Google",
     category: "ai-hardware",
     price: 68000,
@@ -438,61 +463,3 @@ export const PRODUCTS: Product[] = [
     reviews: 23,
   },
 ];
-
-const PRODUCT_IMAGES: Record<string, string> = {
-  "dell-xps-15-9530":
-    "https://m.media-amazon.com/images/I/71lMIBqFiFL._AC_SL1500_.jpg",
-  "hp-elitebook-840-g10":
-    "https://ssl-product-images.www8-hp.com/digmedialib/prodimg/knowledgebase/c08393424.png",
-  "lenovo-thinkpad-x1-carbon":
-    "https://p3-ofp.static.pub/fes/cms/2023/03/20/p7mrv6gfm1c1n3lm0s7r2k8h3bpv3a248455.png",
-  "apple-macbook-air-m2":
-    "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/macbook-air-midnight-gallery1-20230606?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1684518479433",
-  "acer-swift-3":
-    "https://static.acer.com/up/Resource/Acer/Laptops/Swift_3/Images/20220103/Swift-3-SF314-512-Hero-Photo-03.png",
-  "iphone-15-pro":
-    "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch-naturaltitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692845702708",
-  "samsung-galaxy-s24-ultra":
-    "https://images.samsung.com/is/image/samsung/p6pim/levant/2401/gallery/levant-galaxy-s24-ultra-s928-sm-s928bzkgmid-thumb-539571638",
-  "samsung-galaxy-tab-s9-fe":
-    "https://images.samsung.com/is/image/samsung/p6pim/uk/sm-x510nzaabtu/gallery/uk-galaxy-tab-s9-fe-x510-sm-x510nzaabtu-thumb-539244588",
-  "ipad-air-m2":
-    "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-air-select-wifi-blue-202405?wid=5120&hei=2880&fmt=p-jpg&qlt=95&.v=1713920820655",
-  "xiaomi-redmi-note-13-pro-plus":
-    "https://i01.appmifile.com/webfile/globalimg/products/pc/redmi-note-13-pro-plus/specs/redmi-note-13-pro-plus-header.png",
-  "ubiquiti-udm-pro":
-    "https://cdn.shopify.com/s/files/1/0460/3082/products/UDM-Pro_1.jpg",
-  "mikrotik-crs326":
-    "https://i.mt.lv/cdn/ru_photos/CRS326-24G-2SplusRM_photo_600.png",
-  "qnap-ts-464":
-    "https://www.qnap.com/uploads/images/products/TS-464/TS-464_main.png",
-  "tp-link-archer-axe75":
-    "https://static.tp-link.com/upload/image-line/Archer%20AXE75(UN)4.0_1.jpg",
-  "dell-poweredge-t150":
-    "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-server-products/tower/poweredge-t150/media-gallery/server-poweredge-t150-gallery-1.psd?fmt=png-alpha&pscan=auto&scl=1&hei=402&wid=402",
-  "lg-ultrafine-27":
-    "https://www.lg.com/us/images/monitors/md08003672/gallery/27UK850-W-01.jpg",
-  "logitech-mx-combo":
-    "https://resource.logitech.com/content/dam/logitech/en/products/combos/mx-keys-s-combo/gallery/mx-keys-s-combo-gallery-1-graphite-us.png",
-  "samsung-t9-ssd-2tb":
-    "https://images.samsung.com/is/image/samsung/p6pim/uk/mu-pg2t0b-eu/gallery/uk-portable-ssd-t9-mu-pg2t0b-eu-thumb-537713900",
-  "sony-wh-1000xm5":
-    "https://www.sony.com/image/5d02da5df552836db894cead8a68f5f3?fmt=png-alpha&wid=920",
-  "anker-usbc-dock":
-    "https://cdn.shopify.com/s/files/1/0493/9834/9974/products/A8391_V1_1024x1024.jpg",
-  "nvidia-rtx-4080-super":
-    "https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/ada/rtx-4080/geforce-ada-4080-super-shop-630-d@2x.jpg",
-  "nvidia-jetson-orin-nx":
-    "https://developer.nvidia.com/sites/default/files/akamai/embedded/images/jetsonOrin/nvidia-jetson-orin-nano-product-shot-625-ud@2x.jpg",
-  "intel-core-i9-14900k":
-    "https://www.intel.com/content/dam/www/central-libraries/us/en/images/2022-11/processor-core-i9-14900k-badge-left-angle.jpg",
-  "raspberry-pi-5-kit":
-    "https://www.raspberrypi.com/app/uploads/2023/10/pi-5-cooling-gallery-6.jpg",
-  "coral-usb-accelerator":
-    "https://coral.ai/static/docs/images/accelerator/usb-accelerator-header.jpg",
-};
-
-export const PRODUCTLIST = PRODUCTS.map((product) => ({
-  ...product,
-  image: PRODUCT_IMAGES[product.id] ?? "",
-}));
