@@ -1,20 +1,21 @@
 export type Category =
-  | "laptops"
-  | "phones"
-  | "networking"
-  | "peripherals"
-  | "ai-hardware";
+  | 'laptops'
+  | 'phones'
+  | 'networking'
+  | 'peripherals'
+  | 'ai-hardware';
 
 export interface Product {
   id: string;
   name: string;
+  image?: string;
   brand: string;
   category: Category;
   price: number;
   originalPrice?: number;
   description: string;
   specs: string[];
-  badge?: "New" | "Hot" | "Sale" | "Low Stock";
+  badge?: 'New' | 'Hot' | 'Sale' | 'Low Stock';
   inStock: boolean;
   emoji: string;
   bgColor: string;
@@ -22,13 +23,17 @@ export interface Product {
   reviews: number;
 }
 
-export const CATEGORIES: { id: Category | "all"; label: string; icon: string }[] = [
-  { id: "all", label: "All Products", icon: "🏪" },
-  { id: "laptops", label: "Laptops & Computers", icon: "💻" },
-  { id: "phones", label: "Phones & Tablets", icon: "📱" },
-  { id: "networking", label: "Networking & Servers", icon: "🌐" },
-  { id: "peripherals", label: "Peripherals & Accessories", icon: "🖱️" },
-  { id: "ai-hardware", label: "AI & Specialist Hardware", icon: "🤖" },
+export const CATEGORIES: {
+  id: Category | 'all';
+  label: string;
+  icon: string;
+}[] = [
+  { id: 'all', label: 'All Products', icon: '🏪' },
+  { id: 'laptops', label: 'Laptops & Computers', icon: '💻' },
+  { id: 'phones', label: 'Phones & Tablets', icon: '📱' },
+  { id: 'networking', label: 'Networking & Servers', icon: '🌐' },
+  { id: 'peripherals', label: 'Peripherals & Accessories', icon: '🖱️' },
+  { id: 'ai-hardware', label: 'AI & Specialist Hardware', icon: '🤖' },
 ];
 
 export const PRODUCTS: Product[] = [
@@ -433,3 +438,61 @@ export const PRODUCTS: Product[] = [
     reviews: 23,
   },
 ];
+
+const PRODUCT_IMAGES: Record<string, string> = {
+  "dell-xps-15-9530":
+    "https://m.media-amazon.com/images/I/71lMIBqFiFL._AC_SL1500_.jpg",
+  "hp-elitebook-840-g10":
+    "https://ssl-product-images.www8-hp.com/digmedialib/prodimg/knowledgebase/c08393424.png",
+  "lenovo-thinkpad-x1-carbon":
+    "https://p3-ofp.static.pub/fes/cms/2023/03/20/p7mrv6gfm1c1n3lm0s7r2k8h3bpv3a248455.png",
+  "apple-macbook-air-m2":
+    "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/macbook-air-midnight-gallery1-20230606?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1684518479433",
+  "acer-swift-3":
+    "https://static.acer.com/up/Resource/Acer/Laptops/Swift_3/Images/20220103/Swift-3-SF314-512-Hero-Photo-03.png",
+  "iphone-15-pro":
+    "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch-naturaltitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692845702708",
+  "samsung-galaxy-s24-ultra":
+    "https://images.samsung.com/is/image/samsung/p6pim/levant/2401/gallery/levant-galaxy-s24-ultra-s928-sm-s928bzkgmid-thumb-539571638",
+  "samsung-galaxy-tab-s9-fe":
+    "https://images.samsung.com/is/image/samsung/p6pim/uk/sm-x510nzaabtu/gallery/uk-galaxy-tab-s9-fe-x510-sm-x510nzaabtu-thumb-539244588",
+  "ipad-air-m2":
+    "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/ipad-air-select-wifi-blue-202405?wid=5120&hei=2880&fmt=p-jpg&qlt=95&.v=1713920820655",
+  "xiaomi-redmi-note-13-pro-plus":
+    "https://i01.appmifile.com/webfile/globalimg/products/pc/redmi-note-13-pro-plus/specs/redmi-note-13-pro-plus-header.png",
+  "ubiquiti-udm-pro":
+    "https://cdn.shopify.com/s/files/1/0460/3082/products/UDM-Pro_1.jpg",
+  "mikrotik-crs326":
+    "https://i.mt.lv/cdn/ru_photos/CRS326-24G-2SplusRM_photo_600.png",
+  "qnap-ts-464":
+    "https://www.qnap.com/uploads/images/products/TS-464/TS-464_main.png",
+  "tp-link-archer-axe75":
+    "https://static.tp-link.com/upload/image-line/Archer%20AXE75(UN)4.0_1.jpg",
+  "dell-poweredge-t150":
+    "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-server-products/tower/poweredge-t150/media-gallery/server-poweredge-t150-gallery-1.psd?fmt=png-alpha&pscan=auto&scl=1&hei=402&wid=402",
+  "lg-ultrafine-27":
+    "https://www.lg.com/us/images/monitors/md08003672/gallery/27UK850-W-01.jpg",
+  "logitech-mx-combo":
+    "https://resource.logitech.com/content/dam/logitech/en/products/combos/mx-keys-s-combo/gallery/mx-keys-s-combo-gallery-1-graphite-us.png",
+  "samsung-t9-ssd-2tb":
+    "https://images.samsung.com/is/image/samsung/p6pim/uk/mu-pg2t0b-eu/gallery/uk-portable-ssd-t9-mu-pg2t0b-eu-thumb-537713900",
+  "sony-wh-1000xm5":
+    "https://www.sony.com/image/5d02da5df552836db894cead8a68f5f3?fmt=png-alpha&wid=920",
+  "anker-usbc-dock":
+    "https://cdn.shopify.com/s/files/1/0493/9834/9974/products/A8391_V1_1024x1024.jpg",
+  "nvidia-rtx-4080-super":
+    "https://www.nvidia.com/content/dam/en-zz/Solutions/geforce/ada/rtx-4080/geforce-ada-4080-super-shop-630-d@2x.jpg",
+  "nvidia-jetson-orin-nx":
+    "https://developer.nvidia.com/sites/default/files/akamai/embedded/images/jetsonOrin/nvidia-jetson-orin-nano-product-shot-625-ud@2x.jpg",
+  "intel-core-i9-14900k":
+    "https://www.intel.com/content/dam/www/central-libraries/us/en/images/2022-11/processor-core-i9-14900k-badge-left-angle.jpg",
+  "raspberry-pi-5-kit":
+    "https://www.raspberrypi.com/app/uploads/2023/10/pi-5-cooling-gallery-6.jpg",
+  "coral-usb-accelerator":
+    "https://coral.ai/static/docs/images/accelerator/usb-accelerator-header.jpg",
+};
+
+export const PRODUCTLIST = PRODUCTS.map((product) => ({
+  ...product,
+  image: PRODUCT_IMAGES[product.id] ?? "",
+}));

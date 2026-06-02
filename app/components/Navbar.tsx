@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useCart } from "./CartContext";
 
@@ -95,53 +96,19 @@ export default function Navbar() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "10px",
               marginRight: "32px",
               textDecoration: "none",
               flexShrink: 0,
             }}
           >
-            <div
-              style={{
-                width: "36px",
-                height: "36px",
-                background: "linear-gradient(135deg, var(--navy), var(--accent))",
-                borderRadius: "8px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "white",
-                fontFamily: "var(--font-heading)",
-                fontWeight: 800,
-                fontSize: "18px",
-              }}
-            >
-              M
-            </div>
-            <div>
-              <div
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  fontWeight: 700,
-                  fontSize: "15px",
-                  color: "var(--navy)",
-                  lineHeight: 1.1,
-                }}
-              >
-                MARVEL TECH
-              </div>
-              <div
-                style={{
-                  fontSize: "9px",
-                  color: "var(--muted)",
-                  letterSpacing: "0.06em",
-                  fontWeight: 600,
-                  textTransform: "uppercase",
-                }}
-              >
-                Innovations Limited
-              </div>
-            </div>
+            <Image
+              src="/marvel.jpg"
+              alt="Marvel Tech Logo"
+              width={148}
+              height={44}
+              style={{ objectFit: "contain" }}
+              priority
+            />
           </Link>
 
           {/* Desktop Nav */}
@@ -383,16 +350,13 @@ export default function Navbar() {
             borderBottom: "1px solid rgba(255,255,255,0.1)",
           }}
         >
-          <div
-            style={{
-              fontFamily: "var(--font-heading)",
-              fontWeight: 700,
-              fontSize: "16px",
-              color: "white",
-            }}
-          >
-            MARVEL TECH
-          </div>
+          <Image
+            src="/marvel.jpg"
+            alt="Marvel Tech Logo"
+            width={120}
+            height={36}
+            style={{ objectFit: "contain", filter: "brightness(0) invert(1)" }}
+          />
           <button
             onClick={() => setMenuOpen(false)}
             style={{

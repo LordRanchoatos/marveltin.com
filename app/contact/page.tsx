@@ -32,7 +32,7 @@ export default function ContactPage() {
         </svg>
       ),
       label: "Office Address",
-      value: "Nigeria (Address on request)",
+      value: "12 Avera Estate, Ajah, Lagos, Nigeria",
     },
     {
       icon: (
@@ -41,7 +41,7 @@ export default function ContactPage() {
         </svg>
       ),
       label: "Phone / WhatsApp",
-      value: "+234 — Contact for number",
+      value: "+234 814 279 8542",
     },
     {
       icon: (
@@ -51,7 +51,7 @@ export default function ContactPage() {
         </svg>
       ),
       label: "Email",
-      value: "info@marveltechinnovations.com",
+      value: "marveltech@gmail.com",
     },
     {
       icon: (
@@ -371,7 +371,7 @@ export default function ContactPage() {
                 title: "WhatsApp",
                 desc: "Fastest way to get a response. Chat with our team directly.",
                 cta: "Open WhatsApp",
-                href: "https://wa.me/234XXXXXXXXXX",
+                href: "https://wa.me/2348142798542",
                 bg: "#25D366",
               },
               {
@@ -379,7 +379,7 @@ export default function ContactPage() {
                 title: "Email",
                 desc: "Send us a detailed enquiry and we'll respond within 1 business day.",
                 cta: "Send Email",
-                href: "mailto:info@marveltechinnovations.com",
+                href: "mailto:marveltech@gmail.com",
                 bg: "var(--accent)",
               },
               {
@@ -387,7 +387,7 @@ export default function ContactPage() {
                 title: "Phone",
                 desc: "Prefer to speak directly? Call us during business hours.",
                 cta: "Call Now",
-                href: "tel:+234XXXXXXXXXX",
+                href: "tel:+2348142798542",
                 bg: "var(--navy)",
               },
             ].map((item) => (

@@ -39,9 +39,9 @@ const differences = [
 ];
 
 const team = [
-  { name: "Founder & CEO", role: "Visionary leader driving Marvel Tech's mission", initials: "MT", color: "var(--accent)" },
-  { name: "Lead Developer", role: "Engineering excellence across all platforms", initials: "LD", color: "var(--gold-dark)" },
-  { name: "Lead Consultant", role: "Strategic technology advisory", initials: "LC", color: "#16a34a" },
+  { name: "Atolagbe David Tolulope", role: "Visionary leader driving Marvel Tech's mission", initials: "DT", color: "var(--accent)" },
+  { name: "Akindutire Ayomide", role: "Engineering excellence across all platforms", initials: "SA", color: "var(--gold-dark)" },
+  { name: "Dr Boluwatife Solomon", role: "Strategic technology advisory", initials: "BC", color: "#16a34a" },
 ];
 
 export default function AboutPage() {
